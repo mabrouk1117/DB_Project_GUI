@@ -45,8 +45,7 @@ public class AdminChoicesForm extends JFrame
     editATripButton.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            EditTrip E = new EditTrip(connection, AdminID);
-            E.setVisible(true);
+
         }
     });
     deleteATripButton.addActionListener(new ActionListener()
@@ -65,6 +64,5 @@ public class AdminChoicesForm extends JFrame
             DelaTripForm.setVisible(true);
         }
     });
-
 }
 }
