@@ -214,10 +214,10 @@ public class Menue {
                         c.viewTrips(CustomerID) ;
                         break;
                     case 2:
-//                        c.Booking(CustomerID , scanner) ;
+                        c.Booking(CustomerID , scanner) ;
                         break;
                     case 3:
-//                        c.cancel(CustomerID, scanner) ;
+                        c.cancel(CustomerID, scanner) ;
                         break;
                     case 4:
                         update=new Update(connection,CustomerID);

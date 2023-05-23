@@ -444,17 +444,17 @@ import java.sql.*;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        String url = "jdbc:mysql://localhost:3306/my_schema";
-        String username = "root";
-        String password = "1234";
-        try {
-            Connection connection = DriverManager.getConnection(url, username, password);
-            MainFrame myframe= new MainFrame(connection);
-            //m.displayMenu();
+        public static void main(String[] args) {
+            String url = "jdbc:mysql://localhost:3306/my_schema";
+            String username = "root";
+            String password = "1234";
+            try {
+                Connection connection = DriverManager.getConnection(url, username, password);
+                MainFrame myframe= new MainFrame(connection);
+                //m.displayMenu();
 //            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
     }
 }

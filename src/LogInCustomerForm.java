@@ -9,7 +9,7 @@ public class LogInCustomerForm  extends JFrame{
     private JPanel LogInCustomerForm;
     private JButton logInAsAButton;
     private JButton clearButton;
-public LogInCustomerForm(logIn myCustomer  , Connection connection )
+public LogInCustomerForm(logIn myCustomer, Connection connection)
 {
     setContentPane(LogInCustomerForm);
     setTitle("Log-In as a Customer");
@@ -23,10 +23,9 @@ public LogInCustomerForm(logIn myCustomer  , Connection connection )
             int id = Integer.parseInt(tfID.getText());
             String passwordInput = tfpass.getText();
             int successfull_login = myCustomer.loginCustomer(id,passwordInput);
-
             if (successfull_login!=-1)
             {
-                CustomerChoicesForm choicesForm = new CustomerChoicesForm(connection , id) ;
+                CustomerChoicesForm choicesForm = new CustomerChoicesForm(connection,id);
                 choicesForm.setVisible(true);
             }
         }

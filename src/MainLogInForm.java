@@ -19,7 +19,7 @@ public class MainLogInForm extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 logIn loginObj = new logIn(connection);
-                LogInCustomerForm CustomerForm = new LogInCustomerForm(loginObj , connection);
+                LogInCustomerForm CustomerForm = new LogInCustomerForm(loginObj,connection);
             }
         });
         logInAsAnButton.addActionListener(new ActionListener() {
