@@ -35,6 +35,7 @@ public class EditTrip extends JFrame{
                 int Seats=Integer.parseInt(AvailableSeats.getText());
                 myTrip.Edit_a_Trip(TripId,TrainId,OriginStation,DestStation,Dept,Arrival,Seats,Adminid);
                 dispose();
+                //rr
             }
         });
     }
