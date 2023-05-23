@@ -13,7 +13,7 @@ public class AdminChoicesForm extends JFrame
     private JButton updateAnAdminSButton;
     private JPanel AdminChoicesForm;
 
-    public AdminChoicesForm(Connection connection)
+    public AdminChoicesForm(Connection connection,int AdminID)
 {
     setContentPane(AdminChoicesForm);
     setTitle("Admin Choices List");
@@ -60,7 +60,8 @@ public class AdminChoicesForm extends JFrame
     updateAnAdminSButton.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            update_admin_info DelaTripForm = new update_admin_info(connection,AdminID);
+            DelaTripForm.setVisible(true);
         }
     });
 }

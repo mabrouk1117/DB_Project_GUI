@@ -445,9 +445,9 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        String url = "jdbc:sqlserver://192.168.1.4;databaseName=TrainBooking";
-        String username = "momen159";
-        String password = "12345";
+        String url = "jdbc:mysql://localhost:3306/my_schema";
+        String username = "root";
+        String password = "1234";
         try {
             Connection connection = DriverManager.getConnection(url, username, password);
             MainFrame myframe= new MainFrame(connection);

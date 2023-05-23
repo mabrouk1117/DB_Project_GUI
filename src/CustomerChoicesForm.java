@@ -41,7 +41,8 @@ public class CustomerChoicesForm extends JFrame
     updateUserSInformationButton.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            update_info_costumer AddaTrainForm = new update_info_costumer(connection,customerID);
+            AddaTrainForm.setVisible(true);
         }
     });
   }

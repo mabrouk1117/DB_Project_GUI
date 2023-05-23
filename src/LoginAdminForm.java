@@ -26,7 +26,7 @@ public LoginAdminForm(logIn myAdmin, Connection connection)
             int successfull_login= myAdmin.loginAdmin(id,passwordInput);
             if (successfull_login!=-1)
             {
-                AdminChoicesForm choicesForm = new AdminChoicesForm(connection);
+                AdminChoicesForm choicesForm = new AdminChoicesForm(connection,id);
                 choicesForm.setVisible(true);
             }
 
