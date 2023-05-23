@@ -21,7 +21,10 @@ public class CustomerChoicesForm extends JFrame
     viewAvailableTripsButton.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            temp t = new temp();
+            customer c = new customer(connection) ;
+            c.viewTrips(customerID) ;
+            t.run(c.viewTrips(customerID));
         }
     });
     bookATripButton.addActionListener(new ActionListener() {

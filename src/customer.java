@@ -209,26 +209,29 @@
 
 
 
-import javax.swing.*;
 import java.sql.*;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 public class customer {
     private Connection connection;
     customer(Connection connection){
         this.connection = connection;
     }
 
-    public void viewTrips(int customerID){
+    public String[] viewTrips(int customerID){
+        String str="trip ID   origin Station   destination Station   departure Date   arrival Date   available Seats   trainName";
 
         String sql = "SELECT TripID, originStation, DestinationStation, DepartureDate, arrivalDate , availableSeats, trainName";
         sql += " FROM Trip join Train  on Trip.TrainID = Train.trainID where availableSeats != 0  ";
         try {
+            List<String> stringList = new ArrayList<>();
+            stringList.add(str);
 
             PreparedStatement statement = connection.prepareStatement(sql);
 
             ResultSet resultSet = statement.executeQuery();
-            System.out.printf("%-8s %-17s %-20s %-30s %-30s %-20s %-10s%n",
-                    "Trip ID", "Origin Station", "Destination Station", "Departure Date", "Arrival Date", "Available Seats", "Train Name");
+
             while (resultSet.next()) {
                 int tripId = resultSet.getInt("TripID");
                 String originStation = resultSet.getString("originStation");
@@ -239,37 +242,43 @@ public class customer {
                 String trainName = resultSet.getString("trainName");
 
                 // Process the retrieved data as needed
-                System.out.printf("%-8d %-17s %-20s %-30s %-30s %-20d %-10s%n",
-                        tripId, originStation, destinationStation, departureDate, arrivalDate, availableSeats, trainName);
+
+                String s = Integer.toString(tripId) + "        "  + originStation + "                          " +destinationStation +"         "+ departureDate.toString() + "        " +  arrivalDate.toString()+ "        " + Integer.toString( availableSeats) + "        " +  trainName ;
+                stringList.add(s) ;
             }
             statement.close();
             resultSet.close();
+            String[] stringArray = stringList.toArray(new String[stringList.size()]);
+            return stringArray;
         }
         catch (SQLException e) {
             e.printStackTrace();
         }
 
+        String[] stringList2 = new String[0];
+        return stringList2 ;
     }
 
-    public void Booking( int tripID  ,int customerID ){
-
+    public void Booking(int customerID , Scanner scanner ){
+        System.out.println("enter the trip id to book");
+        int tripID = scanner.nextInt();
+        scanner.nextLine();
         try {
+
             String sql = "SELECT availableSeats FROM Trip WHERE tripID = ? ";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, tripID);
             ResultSet resultSet = statement.executeQuery();
 
             if ( !(resultSet.next()) ) {
-                JOptionPane.showMessageDialog(null,"the trip you're trying to book is not available");
-
+                System.out.println("the trip you're trying to book is not available ");
                 statement.close();
                 resultSet.close();
                 return;
             }
             int availableSeats = resultSet.getInt("availableSeats");
             if (availableSeats == 0){
-                JOptionPane.showMessageDialog(null,"the trip you're trying to book is not available");
-
+                System.out.println("the trip you're trying to book is not available ");
                 statement.close();
                 resultSet.close();
                 return;
@@ -283,7 +292,6 @@ public class customer {
         }
 
         int bookingID  , seatNumber;
-
         try {
             String sql = "SELECT COUNT(BookingID) as nxtID FROM Booking";
             PreparedStatement statement = connection.prepareStatement(sql) ;
@@ -325,8 +333,7 @@ public class customer {
             statement.setInt(2, customerID) ;
             statement.setInt(3, tripID) ;
             int resultSet = statement.executeUpdate();
-            JOptionPane.showMessageDialog(null,"you have booked successfully");
-
+            System.out.println("you have booked successfully");
             statement.close();
         }
         catch (SQLException e) {
@@ -340,9 +347,7 @@ public class customer {
             statement.setInt(1, bookingID) ;
             statement.setInt(2, seatNumber) ;
             int resultSet = statement.executeUpdate();
-            String s = "your seat number is " + seatNumber ;
-            JOptionPane.showMessageDialog(null,s);
-
+            System.out.println("your seat number is " + seatNumber );
             statement.close();
         }
         catch (SQLException e) {
@@ -364,10 +369,11 @@ public class customer {
 
 
     }
-    public void cancel(int tripId , int customerId){
-
+    public void cancel(int customerId , Scanner scanner){
+        System.out.println("enter your trip id ");
+        int tripId = scanner.nextInt() ;
+        scanner.nextLine() ;
         int numberOfBooks  ;
-
         try {
             String sql = "delete from Booking where CustomerID = ? and tripID = ?  ";
             PreparedStatement statement = connection.prepareStatement(sql) ;
@@ -375,11 +381,11 @@ public class customer {
             statement.setInt(2, tripId) ;
             numberOfBooks =  statement.executeUpdate() ;
             if (numberOfBooks == 0 ){
-                JOptionPane.showMessageDialog(null,"Either you didn't book this Trip previously Or it's an Invalid trip ID");
+                System.out.println("Either you didn't book this Trip previously Or it's an Invalid trip ID") ;
                 statement.close() ;
                 return;
             }
-            JOptionPane.showMessageDialog(null,"Trip Cancellation Was Done Successfully");
+            System.out.println("Trip Cancellation Was Done Successfully") ;
             statement.close() ;
         }
         catch (SQLException e) {
